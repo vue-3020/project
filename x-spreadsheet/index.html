@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title><%= htmlWebpackPlugin.options.title %></title>
+    
+</head>
+<body onload="load()">
+  <div id="x-spreadsheet-demo"></div>
+  <script>
+    function load(){
+      // x.spreadsheet.locale('zh-cn');
+      x.spreadsheet('#x-spreadsheet-demo')
+        .loadData({
+          freeze: 'C3',
+          styles: [
+            {
+              bgcolor: '#f4f5f8',
+              textwrap: true,
+              color: '#900b09',
+              border: {
+                top: ['thin', '#0366d6'],
+                bottom: ['thin', '#0366d6'],
+                right: ['thin', '#0366d6'],
+                left: ['thin', '#0366d6'],
+              },
+            },
+          ],
+          merges: [
+            'C3:D4',
+          ],
+          rows: {
+            1: {
+              cells: {
+                0: { text: 'hahha ' },
+                2: { text: 'testingd' },
+              },
+            },
+            2: {
+              cells: {
+                0: { text: '这不是我的', style: 0 },
+                1: { text: '你好' },
+                2: { text: '这个还不错', merge: [1, 1] },
+              }
+            },
+            8: {
+              cells: {
+                8: { text: 'border test', style: 0 },
+              }
+            }
+          },
+        }).change((cdata) => console.log(cdata));
+    }
+  </script>
+</body>
+</html>
